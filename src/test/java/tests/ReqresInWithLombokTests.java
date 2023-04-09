@@ -1,10 +1,14 @@
 package tests;
 
+import io.qameta.allure.restassured.AllureRestAssured;
 import models.LoginBodyModel;
 import models.LoginResponseModel;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+
+import static helpers.CustomAllureListener.withCustomTemplates;
+import static io.qameta.allure.Allure.step;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import static io.restassured.RestAssured.given;
@@ -21,20 +25,24 @@ public class ReqresInWithLombokTests {
         loginBody.setEmail("eve.holt@reqres.in");
         loginBody.setPassword("cityslicka");
 
-        LoginResponseModel loginResponse = given()
-                .log().uri()
-                .log().body()
-                .contentType(JSON)
-                .body(loginBody)
-                .when()
-                .post("https://reqres.in/api/login")
-                .then()
-                .log().status()
-                .log().body()
-                .statusCode(200)
-                .extract().as(LoginResponseModel.class);
+        LoginResponseModel loginResponse =
+                step("Get login data", () ->
+                    given()
+                        .filter(withCustomTemplates())
+                        .log().uri()
+                        .log().body()
+                        .contentType(JSON)
+                        .body(loginBody)
+                        .when()
+                        .post("https://reqres.in/api/login")
+                        .then()
+                        .log().status()
+                        .log().body()
+                        .statusCode(200)
+                        .extract().as(LoginResponseModel.class));
 
-        assertThat(loginResponse.getToken()).isEqualTo("QpwL5tke4Pnpja7X4");
+        step("Verify login response", () ->
+                assertThat(loginResponse.getToken()).isEqualTo("QpwL5tke4Pnpja7X4"));
 
     }
 
@@ -46,6 +54,7 @@ public class ReqresInWithLombokTests {
         loginBody.setPassword("testEmailtest");
 
         given()
+                .filter(withCustomTemplates())
                 .log().uri()
                 .log().body()
                 .contentType(JSON)
