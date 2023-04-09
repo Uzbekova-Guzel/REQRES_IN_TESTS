@@ -1,5 +1,7 @@
 plugins {
     id 'java'
+    id 'io.qameta.allure' version '2.11.2'
+    id "io.freefair.lombok" version "6.0.0-m2"
 }
 
 group 'quru.qa'
@@ -12,8 +14,10 @@ repositories {
 dependencies {
     testImplementation(
             "io.rest-assured:rest-assured:5.3.0",
+            "com.fasterxml.jackson.core:jackson-databind:2.14.2",
             "org.junit.jupiter:junit-jupiter:5.9.2",
-            "org.slf4j:slf4j-simple:2.0.6"
+            "org.slf4j:slf4j-simple:2.0.6",
+            "org.assertj:assertj-core:3.24.2"
     )
 }
 
@@ -24,4 +28,11 @@ test {
 tasks.withType(Test) {
     systemProperties(System.getProperties())
     useJUnitPlatform()
+}
+
+task tests_lombok (type: Test) {
+    useJUnitPlatform {
+        includeTags("LombokTests")
+    }
+    systemProperties(System.getProperties())
 }
