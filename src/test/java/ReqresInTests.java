@@ -9,7 +9,7 @@ public class ReqresInTests {
 
     @Test
     @DisplayName("Checking user first name in Single User")
-    void FirstNameInSingleUserTest() {
+    void firstNameInSingleUserTest() {
         given()
                 .log().uri()
                 .when()
@@ -24,7 +24,7 @@ public class ReqresInTests {
 
     @Test
     @DisplayName("Checking user email in User List")
-    void EmailInListUserTest() {
+    void emailInListUserTest() {
         given()
                 .log().uri()
                 .when()
@@ -38,7 +38,7 @@ public class ReqresInTests {
 
     @Test
     @DisplayName("Checking single user: user not found")
-    void SingleUserNotFoundTest() {
+    void singleUserNotFoundTest() {
         given()
                 .log().uri()
                 .when()
@@ -51,7 +51,7 @@ public class ReqresInTests {
 
     @Test
     @DisplayName("Checking login unsuccessful")
-    void LoginErrorTest() {
+    void loginErrorTest() {
         String data = "{ \"email\": \"testEmail@test\", \"password\": \"test\" }";
 
         given()
@@ -69,7 +69,7 @@ public class ReqresInTests {
 
     @Test
     @DisplayName("Checking login successful")
-    void LoginSuccessfulTest() {
+    void loginSuccessfulTest() {
         String data = "{ \"email\": \"eve.holt@reqres.in\", \"password\": \"cityslicka\" }";
 
         given()
@@ -87,7 +87,7 @@ public class ReqresInTests {
 
     @Test
     @DisplayName("Checking update user")
-    void UpdateUserTest() {
+    void updateUserTest() {
         String data = "{ \"name\": \"morpheus\", \"job\": \"zion resident\" }";
 
         given()
