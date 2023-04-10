@@ -47,7 +47,6 @@ public class ReqresInWithGroovyTests {
                                 .spec(responseSpecWithCode400)
                                 .extract().as(LoginResponseErrorModel.class));
 
-
         step("Verify login response", () ->
                 assertThat(loginResponseError.getError()).isEqualTo("user not found"));
     }
@@ -89,6 +88,7 @@ public class ReqresInWithGroovyTests {
                                 .then()
                                 .spec(updateResponseSpec)
                                 .extract().as(UpdateResponseModel.class));
+
         step("Verify update response", () -> {
             assertThat(updateResponse.getName()).isEqualTo("morpheus");
             assertThat(updateResponse.getJob()).isEqualTo("zion resident");

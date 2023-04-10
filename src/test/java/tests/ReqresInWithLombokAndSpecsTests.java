@@ -94,6 +94,7 @@ public class ReqresInWithLombokAndSpecsTests {
                                 .then()
                                 .spec(updateResponseSpec)
                                 .extract().as(UpdateResponseModel.class));
+
         step("Verify update response", () -> {
             assertThat(updateResponse.getName()).isEqualTo("morpheus");
             assertThat(updateResponse.getJob()).isEqualTo("zion resident");
