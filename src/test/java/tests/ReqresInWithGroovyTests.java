@@ -6,34 +6,28 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static io.qameta.allure.Allure.step;
-import static org.assertj.core.api.Assertions.assertThat;
-
 import static io.restassured.RestAssured.given;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.Matchers.is;
 import static specs.Spec.*;
 
-@Tag("LombokTests")
-public class ReqresInWithLombokAndSpecsTests {
+public class ReqresInWithGroovyTests {
 
     @Test
-    @DisplayName("Check that status code of request of list existing users is 200 OK")
+    @DisplayName("Check that response body has email")
+    @Tag("GroovyTests")
     void firstNameInSingleUserLombokTest() {
-            step("Check that status code of request of list existing users is 200 OK", () ->
+            step("Check that response body has email", () ->
                 given(requestSpec)
                     .when()
-                    .get("/users/2")
+                    .get("/users?page=2")
                     .then()
-                    .spec(responseSpecWithCode200));
-    }
-
-    @Test
-    @DisplayName("Check that status code of request of non-existent resource is 404 Not Found ")
-    void resourceNotFoundLombokTest() {
-            step("Check that status code of request of non-existent resources is 404 Not Found", () ->
-                given(requestSpec)
-                    .when()
-                    .get("/unknown/23")
-                    .then()
-                    .spec(responseSpecWithCode404));
+                    .spec(responseSpecWithCode200))
+                    .body("data.find{it.id == 10}.email", is("byron.fields@reqres.in"))
+                    .body("data.findAll{it.email =~/.*?@reqres.in/}.email.flatten()",
+                            hasItem("george.edwards@reqres.in"))
+                    .body("data.findAll{it}.id.flatten()", hasItem(10));
     }
 
     @Test

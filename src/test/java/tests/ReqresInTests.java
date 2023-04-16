@@ -23,7 +23,6 @@ public class ReqresInTests {
                 .body("data.first_name", is("Janet"));
     }
 
-
     @Test
     @DisplayName("Checking user email in User List")
     void emailInListUserTest() {
