@@ -29,7 +29,6 @@
 </div>
 
 Автотесты написаны на `Java` с использованием `JUnit 5` и `Gradle`.
-Реализована  с  и  после завершения прогона.
 
 Краткий список интересных фактов о проекте:
 - [x] Использование `Lombok` для моделей в API тестах
@@ -67,7 +66,7 @@ gradle clean api_test
 </p>
 
 <a id="allure"></a>
-## Отчеты в <a target="_blank" href="https://jenkins.autotests.cloud/job/017_Guzel_Uz_web_fitmost_tests/12/allure/"> Allure report </a>
+## Отчеты в <a target="_blank" href="https://jenkins.autotests.cloud/job/017_Guzel_Uz_api_reqresin_tests/2/allure/"> Allure report </a>
 
 ### Основное окно
 
