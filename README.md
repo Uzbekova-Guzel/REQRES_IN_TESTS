@@ -55,7 +55,7 @@
 ##  Запуск тестов
 
 ```
-gradle clean api_test 
+gradle clean api_tests 
 ```
 
 <a id="jenkins"></a>
